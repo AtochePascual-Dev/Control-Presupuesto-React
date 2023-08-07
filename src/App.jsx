@@ -1,9 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import NuevoPresupuesto from "./components/NuevoPresupuesto"
+import ControlPresupuesto from "./components/ControlPresupuesto";
 
 function App() {
   const [presupuesto, setPresupuesto] = useState(0);
+  const [esValidoPresupuesto, setEsValidoPresupuesto] = useState(false);
+
+  useEffect(() => {
+    if (presupuesto > 0) {
+      setEsValidoPresupuesto(true);
+    };
+  }, [presupuesto]);
 
 
   return (
@@ -11,11 +19,18 @@ function App() {
       <Header />
 
       <main className="px-5">
-        <NuevoPresupuesto
-          presupuesto={presupuesto}
-          setPresupuesto={setPresupuesto}
-        />
-
+        {
+          esValidoPresupuesto
+            ?
+            <ControlPresupuesto
+              presupuesto={presupuesto}
+            />
+            :
+            <NuevoPresupuesto
+              presupuesto={presupuesto}
+              setPresupuesto={setPresupuesto}
+            />
+        }
       </main>
 
     </div>

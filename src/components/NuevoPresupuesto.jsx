@@ -22,20 +22,19 @@ const NuevoPresupuesto = ({ setPresupuesto }) => {
       onSubmit={handleAgregarPresupuesto}
     >
 
-      {error && <Error />}
 
       <label
         htmlFor="presupuesto"
         className="mb-3 block text-xl font-bold text-gray-500 text-center"
       >
-        Ingres tu Presupuesto
+        Ingresa tu Presupuesto
       </label>
 
       <input
         id="presupuesto"
         type="number"
         placeholder="$100"
-        className="w-full mb-8 p-2 border rounded-md outline-none"
+        className="w-full mb-8 p-2 border text-center rounded-md outline-none"
       />
 
       <input
@@ -43,6 +42,9 @@ const NuevoPresupuesto = ({ setPresupuesto }) => {
         type="submit"
         className="w-full p-2 font-bold rounded-md uppercase cursor-pointer text-white bg-indigo-600"
       />
+
+      {error && <Error />}
+
     </form>
   )
 }
