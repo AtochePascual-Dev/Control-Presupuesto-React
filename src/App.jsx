@@ -44,6 +44,8 @@ function App() {
         <Modal
           esActivoModal={esActivoModal}
           setEsActivoModal={setEsActivoModal}
+          gastos={gastos}
+          setGastos={setGastos}
         />
 
       </main>

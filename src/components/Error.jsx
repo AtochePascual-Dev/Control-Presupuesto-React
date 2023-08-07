@@ -1,9 +1,8 @@
-const Error = () => {
-
+const Error = ({ mensaje }) => {
 
   return (
     <div className="my-5 p-2 font-bold uppercase text-center rounded-md text-white bg-red-700">
-      <p>Presupuesto no valido</p>
+      <p>{mensaje}</p>
     </div>
   )
 }

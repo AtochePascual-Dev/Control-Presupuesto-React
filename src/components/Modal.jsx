@@ -1,8 +1,41 @@
-const Modal = ({ esActivoModal, setEsActivoModal }) => {
+import { useState } from "react";
+import Error from "./Error";
+import { generarId } from "../helpers";
+
+const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
+  const [nombre, setNombre] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [mensaje, setMensaje] = useState('');
+
 
   const handleRegistrarGasto = (event) => {
     event.preventDefault();
 
+    if ([nombre, cantidad, categoria].includes('')) {
+      setMensaje('Todos los campos son obligatorios');
+      return
+    } else if (cantidad <= 0) {
+      setMensaje('Cantidad no valida');
+      return;
+    }
+
+    setMensaje('');
+
+    const nuevoGasto = {
+      nombre,
+      cantidad,
+      categoria,
+      id: generarId()
+    }
+
+    setGastos([...gastos, nuevoGasto]);
+
+    setNombre('');
+    setCantidad('');
+    setCategoria('');
+
+    setEsActivoModal(false);
   }
 
   return (
@@ -27,6 +60,8 @@ const Modal = ({ esActivoModal, setEsActivoModal }) => {
           <input
             id="gasto"
             type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
             className="w-full py-1 px-2 rounded-md outline-none text-gray-700"
           />
         </div>
@@ -42,6 +77,8 @@ const Modal = ({ esActivoModal, setEsActivoModal }) => {
           <input
             id="cantidad"
             type="number"
+            value={cantidad}
+            onChange={(e) => setCantidad(Number(e.target.value))}
             className="w-full py-1 px-2 rounded-md outline-none text-gray-700"
           />
         </div>
@@ -57,6 +94,8 @@ const Modal = ({ esActivoModal, setEsActivoModal }) => {
           <select
             id="categoria"
             className="w-full py-1 px-2 text-center rounded-md outline-none text-white-700 cursor-pointer text-gray-900"
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
           >
             <option value="">-- Seleccione --</option>
             <option value="ahorro">Ahorro</option>
@@ -71,16 +110,21 @@ const Modal = ({ esActivoModal, setEsActivoModal }) => {
         <input
           type="submit"
           value="Añadir Gasto"
-          className="w-full mt-3 p-1 font-bold uppercase rounded-md cursor-pointer transition-colors duration-500 text-white border hover:bg-blue-800 hover:border-none"
+          className="w-full mt-3 p-1 font-bold uppercase rounded-md cursor-pointer text-white bg-blue-800 hover:border-none"
         />
-      </form>
 
-      <p
-        onClick={() => setEsActivoModal(false)}
-        className="absolute top-3 right-3 inline-block px-5 py-1 font-bold rounded-full border cursor-pointer text-gray-900 hover:bg-white transition-colors duration-300"
-      >
-        X
-      </p>
+        <p
+          onClick={() => setEsActivoModal(false)}
+          className="absolute top-3 right-3 inline-block px-5 py-1 font-bold rounded-full border cursor-pointer text-gray-900 hover:bg-white transition-colors duration-300"
+        >
+          X
+        </p>
+
+        {
+          mensaje &&
+          <Error mensaje={mensaje} />
+        }
+      </form>
 
     </div>
   )
