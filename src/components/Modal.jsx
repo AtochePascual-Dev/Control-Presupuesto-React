@@ -1,4 +1,4 @@
-const Modal = () => {
+const Modal = ({ esActivoModal, setEsActivoModal }) => {
 
   const handleRegistrarGasto = (event) => {
     event.preventDefault();
@@ -6,7 +6,7 @@ const Modal = () => {
   }
 
   return (
-    <div className="fixed left-0 right-0 top-0 bottom-0 translate-x-0 transition-all duration-500 px-5 py-10 text-white bg-indigo-600">
+    <div className={`fixed left-0 right-0 top-0 bottom-0 transition-all duration-700 ease-in px-5 py-14 text-white bg-indigo-600 ${esActivoModal ? "translate-x-0" : "translate-x-full"}`}>
 
       <form
         className="max-w-xs mx-auto"
@@ -74,6 +74,13 @@ const Modal = () => {
           className="w-full mt-3 p-1 font-bold uppercase rounded-md cursor-pointer transition-colors duration-500 text-white border hover:bg-blue-800 hover:border-none"
         />
       </form>
+
+      <p
+        onClick={() => setEsActivoModal(false)}
+        className="absolute top-3 right-3 inline-block px-5 py-1 font-bold rounded-full border cursor-pointer text-gray-900 hover:bg-white transition-colors duration-300"
+      >
+        X
+      </p>
 
     </div>
   )

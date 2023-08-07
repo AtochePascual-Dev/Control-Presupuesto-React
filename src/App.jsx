@@ -8,6 +8,11 @@ function App() {
   const [presupuesto, setPresupuesto] = useState(Number(localStorage.getItem('presupuesto')) || 0);
   const [esValidoPresupuesto, setEsValidoPresupuesto] = useState(false);
 
+  const [esActivoModal, setEsActivoModal] = useState(false);
+
+  const [gastos, setGastos] = useState([]);
+
+
   useEffect(() => {
     if (presupuesto > 0) {
       setEsValidoPresupuesto(true);
@@ -18,7 +23,7 @@ function App() {
 
 
   return (
-    <div className="pt-10 h-screen overflow-hidden">
+    <div className="pt-10">
       <Header />
 
       <main className="w-11/12 max-w-lg mx-auto mb-10 px-5 py-10 rounded-md bg-white shadow-lg">
@@ -27,6 +32,7 @@ function App() {
             ?
             <ControlPresupuesto
               presupuesto={presupuesto}
+              setEsActivoModal={setEsActivoModal}
             />
             :
             <NuevoPresupuesto
@@ -35,7 +41,11 @@ function App() {
             />
         }
 
-        <Modal />
+        <Modal
+          esActivoModal={esActivoModal}
+          setEsActivoModal={setEsActivoModal}
+        />
+
       </main>
 
     </div>

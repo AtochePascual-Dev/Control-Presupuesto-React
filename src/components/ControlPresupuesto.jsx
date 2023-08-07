@@ -2,7 +2,7 @@ import { CircularProgressbar } from "react-circular-progressbar"
 import 'react-circular-progressbar/dist/styles.css';
 import { formatearCantidad } from "../helpers"
 
-const ControlPresupuesto = ({ presupuesto }) => {
+const ControlPresupuesto = ({ presupuesto, setEsActivoModal }) => {
   return (
     <div className="grid gap-5 justify-center md:grid-cols-2"    >
 
@@ -33,7 +33,10 @@ const ControlPresupuesto = ({ presupuesto }) => {
           </p>
         </div>
 
-        <button className="w-full mt-5 p-1 font-bold rounded-md transition-colors duration-300 text-white bg-indigo-600 hover:bg-indigo-700">
+        <button
+          onClick={() => setEsActivoModal(true)}
+          className="w-full mt-5 p-1 font-bold rounded-md transition-colors duration-300 text-white bg-indigo-600 hover:bg-indigo-700"
+        >
           Añadir Gasto
         </button>
       </div>
