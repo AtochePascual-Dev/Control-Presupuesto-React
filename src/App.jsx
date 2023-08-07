@@ -15,10 +15,10 @@ function App() {
 
 
   return (
-    <div className="w-11/12 max-w-lg mx-auto mt-10 py-5 rounded-md bg-white">
+    <div className="w-11/12 max-w-lg mx-auto px-5 py-10  rounded-md bg-white shadow-lg">
       <Header />
 
-      <main className="px-5">
+      <main >
         {
           esValidoPresupuesto
             ?
