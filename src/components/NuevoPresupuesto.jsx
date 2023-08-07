@@ -1,16 +1,19 @@
 import { useState } from "react";
+import Error from "./Error";
 
 const NuevoPresupuesto = ({ setPresupuesto }) => {
+  const [error, setError] = useState(false);
+  let nuevoPresupuesto;
 
   const handleAgregarPresupuesto = (event) => {
     event.preventDefault();
-    const nuevoPresupuesto = document.querySelector('#presupuesto').value;
+    nuevoPresupuesto = document.querySelector('#presupuesto').value;
 
     if (nuevoPresupuesto <= 0) {
-      console.log("Presupuesto no valido");
+      setError(true);
       return false;
     }
-
+    setError(false);
     setPresupuesto(Number(nuevoPresupuesto))
   };
 
@@ -18,6 +21,9 @@ const NuevoPresupuesto = ({ setPresupuesto }) => {
     <form
       onSubmit={handleAgregarPresupuesto}
     >
+
+      {error && <Error />}
+
       <label
         htmlFor="presupuesto"
         className="mb-3 block text-xl font-bold text-gray-500 text-center"
