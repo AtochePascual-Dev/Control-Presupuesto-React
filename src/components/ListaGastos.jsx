@@ -1,6 +1,6 @@
 import Gasto from "./Gasto"
 
-const ListaGastos = ({ gastos }) => {
+const ListaGastos = ({ gastos, setGastos }) => {
   return (
     <div >
 
@@ -9,6 +9,8 @@ const ListaGastos = ({ gastos }) => {
           <Gasto
             key={gasto.id}
             gasto={gasto}
+            gastos={gastos}
+            setGastos={setGastos}
           />
         )
       }

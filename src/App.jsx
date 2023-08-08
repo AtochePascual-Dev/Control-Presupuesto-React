@@ -54,6 +54,7 @@ function App() {
 
       <ListaGastos
         gastos={gastos}
+        setGastos={setGastos}
       />
 
 

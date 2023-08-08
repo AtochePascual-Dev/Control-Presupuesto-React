@@ -7,10 +7,8 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos }) => {
   const [gastado, setGastado] = useState(0);
 
   useEffect(() => {
-    if (gastos.length > 0) {
-      const totalGastado = gastos.reduce((total, gasto) => total + gasto.cantidad, 0);
-      setGastado(totalGastado);
-    };
+    const totalGastado = gastos.reduce((total, gasto) => total + gasto.cantidad, 0);
+    setGastado(totalGastado);
   }, [gastos]);
 
   return (
