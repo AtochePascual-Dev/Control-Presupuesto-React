@@ -10,19 +10,21 @@ function App() {
   const [presupuesto, setPresupuesto] = useState(Number(localStorage.getItem('presupuesto')) || 0);
   const [esValidoPresupuesto, setEsValidoPresupuesto] = useState(false);
   const [esActivoModal, setEsActivoModal] = useState(false);
-  const [gastos, setGastos] = useState([]);
+  const [gastos, setGastos] = useState(JSON.parse(localStorage.getItem('gastos')) || []);
   const [gastoEditar, setGastoEditar] = useState({});
   const [categoriaFiltro, setCategoriaFiltro] = useState("");
   const [gastosFiltrados, setGastosFiltrados] = useState([]);
 
 
   useEffect(() => {
-    if (presupuesto > 0) {
-      setEsValidoPresupuesto(true);
-    };
-
+    presupuesto > 0 ? setEsValidoPresupuesto(true) : setEsValidoPresupuesto(false);
     localStorage.setItem('presupuesto', presupuesto);
   }, [presupuesto]);
+
+
+  useEffect(() => {
+    localStorage.setItem('gastos', JSON.stringify(gastos));
+  }, [gastos]);
 
 
   useEffect(() => {
@@ -43,8 +45,10 @@ function App() {
             <>
               <ControlPresupuesto
                 presupuesto={presupuesto}
+                setPresupuesto={setPresupuesto}
                 setEsActivoModal={setEsActivoModal}
                 gastos={gastos}
+                setGastos={setGastos}
               />
 
               <Select

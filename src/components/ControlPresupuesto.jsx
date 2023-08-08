@@ -3,13 +3,18 @@ import { CircularProgressbar } from "react-circular-progressbar"
 import 'react-circular-progressbar/dist/styles.css';
 import { formatearCantidad } from "../helpers"
 
-const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos }) => {
+const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos, setPresupuesto, setGastos }) => {
   const [gastado, setGastado] = useState(0);
 
   useEffect(() => {
     const totalGastado = gastos.reduce((total, gasto) => total + gasto.cantidad, 0);
     setGastado(totalGastado);
   }, [gastos]);
+
+  const handleResetApp = () => {
+    setPresupuesto(0);
+    setGastos([])
+  };
 
   return (
     <div className="w-11/12 max-w-lg mx-auto grid gap-5 justify-center mb-10 px-5 py-10 rounded-md md:grid-cols-2 bg-white shadow-lg">
@@ -18,7 +23,10 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos }) => {
         <div className="w-2/3 mx-auto">
           <CircularProgressbar />
         </div>
-        <button className="w-full mt-5 p-1 font-bold rounded-md transition-colors duration-300 text-white bg-rose-700 hover:bg-rose-800">
+        <button
+          onClick={handleResetApp}
+          className="w-full mt-5 p-1 font-bold rounded-md transition-colors duration-300 text-white bg-rose-700 hover:bg-rose-800"
+        >
           Resetear App
         </button>
       </div>
