@@ -58,6 +58,16 @@ function App() {
                 setGastosFiltrados={setGastosFiltrados}
               />
 
+              {
+                categoriaFiltro
+                  ? gastosFiltrados.length > 0
+                    ? <h2 className="w-11/12 max-w-lg mx-auto mb-5 text-3xl font-black text-gray-500">{categoriaFiltro}</h2>
+                    : <h2 className="w-11/12 max-w-lg mx-auto mb-5 text-3xl font-black text-gray-500">No hay Gastos en esta categoría</h2>
+                  : gastos.length > 0
+                    ? <h2 className="w-11/12 max-w-lg mx-auto mb-5 text-3xl font-black text-gray-500">Tus Gastos</h2>
+                    : <h2 className="w-11/12 max-w-lg mx-auto mb-5 text-3xl font-black text-gray-500">No hay Gastos</h2>
+              }
+
               <ListaGastos
                 gastos={gastos}
                 setGastos={setGastos}
