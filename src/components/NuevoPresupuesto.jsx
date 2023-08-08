@@ -44,7 +44,7 @@ const NuevoPresupuesto = ({ setPresupuesto }) => {
         className="w-full p-2 font-bold rounded-md uppercase cursor-pointer text-white bg-indigo-600"
       />
 
-      {error && <Error />}
+      {error && <Error mensaje="Presupuesto no valido" />}
 
     </form>
   )
