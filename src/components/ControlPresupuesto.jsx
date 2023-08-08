@@ -18,7 +18,7 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos }) => {
         <div className="w-2/3 mx-auto">
           <CircularProgressbar />
         </div>
-        <button className="w-full mt-5 p-1 font-bold rounded-md transition-colors duration-300 text-white bg-red-700 hover:bg-red-800">
+        <button className="w-full mt-5 p-1 font-bold rounded-md transition-colors duration-300 text-white bg-rose-700 hover:bg-rose-800">
           Resetear App
         </button>
       </div>
