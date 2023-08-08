@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import NuevoPresupuesto from "./components/NuevoPresupuesto"
 import ControlPresupuesto from "./components/ControlPresupuesto";
 import Modal from "./components/Modal";
+import ListaGastos from "./components/ListaGastos";
 
 function App() {
   const [presupuesto, setPresupuesto] = useState(Number(localStorage.getItem('presupuesto')) || 0);
@@ -27,6 +28,7 @@ function App() {
       <Header />
 
       <main className="w-11/12 max-w-lg mx-auto mb-10 px-5 py-10 rounded-md bg-white shadow-lg">
+
         {
           esValidoPresupuesto
             ?
@@ -47,8 +49,12 @@ function App() {
           gastos={gastos}
           setGastos={setGastos}
         />
-
       </main>
+
+      <ListaGastos
+        gastos={gastos}
+      />
+
 
     </div>
   )

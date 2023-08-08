@@ -26,6 +26,7 @@ const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
       nombre,
       cantidad,
       categoria,
+      fecha: Date.now(),
       id: generarId()
     }
 
@@ -39,7 +40,7 @@ const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
   }
 
   return (
-    <div className={`fixed left-0 right-0 top-0 bottom-0 transition-all duration-700 ease-in px-5 py-14 text-white bg-indigo-600 ${esActivoModal ? "translate-x-0" : "translate-x-full"}`}>
+    <section className={`fixed left-0 right-0 top-0 bottom-0 transition-all duration-700 ease-in px-5 py-14 text-white bg-indigo-600 ${esActivoModal ? "translate-x-0" : "translate-x-full"}`}>
 
       <form
         className="max-w-xs mx-auto"
@@ -126,7 +127,7 @@ const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
         }
       </form>
 
-    </div>
+    </section>
   )
 }
 
