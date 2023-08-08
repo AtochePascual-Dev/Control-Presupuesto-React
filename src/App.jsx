@@ -8,10 +8,9 @@ import ListaGastos from "./components/ListaGastos";
 function App() {
   const [presupuesto, setPresupuesto] = useState(Number(localStorage.getItem('presupuesto')) || 0);
   const [esValidoPresupuesto, setEsValidoPresupuesto] = useState(false);
-
   const [esActivoModal, setEsActivoModal] = useState(false);
-
   const [gastos, setGastos] = useState([]);
+  const [gastoEditar, setGastoEditar] = useState({});
 
 
   useEffect(() => {
@@ -49,12 +48,16 @@ function App() {
           setEsActivoModal={setEsActivoModal}
           gastos={gastos}
           setGastos={setGastos}
+          gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
         />
       </main>
 
       <ListaGastos
         gastos={gastos}
         setGastos={setGastos}
+        setEsActivoModal={setEsActivoModal}
+        setGastoEditar={setGastoEditar}
       />
 
 

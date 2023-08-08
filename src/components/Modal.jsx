@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Error from "./Error";
 import { generarId } from "../helpers";
 
-const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
+const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos, gastoEditar, setGastoEditar }) => {
   const [nombre, setNombre] = useState('');
   const [cantidad, setCantidad] = useState('');
   const [categoria, setCategoria] = useState('');
   const [mensaje, setMensaje] = useState('');
+  const [editar, setEditar] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(gastoEditar).length > 0) {
+      setNombre(gastoEditar.nombre)
+      setCantidad(gastoEditar.cantidad)
+      setCategoria(gastoEditar.categoria)
+      setEditar(true);
+    }
+  }, [gastoEditar]);
 
 
   const handleRegistrarGasto = (event) => {
@@ -27,20 +37,34 @@ const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
       cantidad,
       categoria,
       fecha: Date.now(),
-      id: generarId()
     }
 
-    setGastos([...gastos, nuevoGasto]);
+    if (editar) {
+      // Editar Gasto
+      nuevoGasto.id = gastoEditar.id;
+      const gastosActualizados = gastos.map((gastoState) => gastoState.id === gastoEditar.id ? nuevoGasto : gastoState);
+      setGastos(gastosActualizados);
+    } else {
+      // Agregar gasto
+      nuevoGasto.id = generarId();
+      setGastos([...gastos, nuevoGasto]);
+    }
 
+    cerrarModal();
+  }
+
+  const cerrarModal = () => {
     setNombre('');
     setCantidad('');
     setCategoria('');
 
+    setGastoEditar({})
+
     setEsActivoModal(false);
-  }
+  };
 
   return (
-    <section className={`fixed z-10 left-0 right-0 top-0 bottom-0 transition-all duration-700 ease-in px-5 py-14 text-white bg-indigo-600 ${esActivoModal ? "translate-x-0" : "translate-x-full"}`}>
+    <section className={`fixed z-10 left-0 right-0 top-0 bottom-0 transition-all duration-300 ease-in px-5 py-14 text-white bg-indigo-600 ${esActivoModal ? "translate-x-0" : "translate-x-full"}`}>
 
       <form
         className="max-w-xs mx-auto"
@@ -115,7 +139,7 @@ const Modal = ({ esActivoModal, setEsActivoModal, gastos, setGastos }) => {
         />
 
         <p
-          onClick={() => setEsActivoModal(false)}
+          onClick={cerrarModal}
           className="absolute top-3 right-3 inline-block px-5 py-1 font-bold rounded-full border cursor-pointer text-gray-900 hover:bg-white transition-colors duration-300"
         >
           X

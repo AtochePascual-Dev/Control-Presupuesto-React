@@ -17,7 +17,7 @@ import IcoSuscripciones from '../img/icono_suscripciones.svg';
 import { formatearCantidad, formatearFecha } from "../helpers";
 
 
-const Gasto = ({ gasto, gastos, setGastos }) => {
+const Gasto = ({ gasto, gastos, setGastos, setEsActivoModal, setGastoEditar }) => {
   const { nombre, cantidad, categoria, fecha, id } = gasto;
 
   const ICONOS = {
@@ -33,6 +33,11 @@ const Gasto = ({ gasto, gastos, setGastos }) => {
   const eliminarGasto = () => {
     const gastosActualizados = gastos.filter((gastoState) => gastoState.id !== id);
     setGastos(gastosActualizados);
+  };
+
+  const editarGasto = () => {
+    setEsActivoModal(true)
+    setGastoEditar(gasto)
   };
 
   const trailingActions = () => (
@@ -52,7 +57,7 @@ const Gasto = ({ gasto, gastos, setGastos }) => {
   const leadingActions = () => (
     <LeadingActions>
       <SwipeAction
-        onClick={() => console.info('swipe action triggered')}
+        onClick={() => editarGasto()}
         className="flex justify-center items-center font-bold text-white bg-indigo-600"
       >
         Editar
