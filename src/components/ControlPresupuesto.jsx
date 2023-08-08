@@ -12,7 +12,7 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos }) => {
   }, [gastos]);
 
   return (
-    <div className="grid gap-5 justify-center md:grid-cols-2"    >
+    <div className="w-11/12 max-w-lg mx-auto grid gap-5 justify-center mb-10 px-5 py-10 rounded-md md:grid-cols-2 bg-white shadow-lg">
 
       <div className="">
         <div className="w-2/3 mx-auto">

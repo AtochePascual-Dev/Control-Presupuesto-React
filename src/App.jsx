@@ -35,16 +35,35 @@ function App() {
     <div className="pt-10">
       <Header />
 
-      <main className="w-11/12 max-w-lg mx-auto mb-10 px-5 py-10 rounded-md bg-white shadow-lg">
+      <main>
 
         {
           esValidoPresupuesto
             ?
-            <ControlPresupuesto
-              presupuesto={presupuesto}
-              setEsActivoModal={setEsActivoModal}
-              gastos={gastos}
-            />
+            <>
+              <ControlPresupuesto
+                presupuesto={presupuesto}
+                setEsActivoModal={setEsActivoModal}
+                gastos={gastos}
+              />
+
+              <Select
+                gastos={gastos}
+                categoriaFiltro={categoriaFiltro}
+                setCategoriaFiltro={setCategoriaFiltro}
+                setGastosFiltrados={setGastosFiltrados}
+              />
+
+              <ListaGastos
+                gastos={gastos}
+                setGastos={setGastos}
+                setEsActivoModal={setEsActivoModal}
+                setGastoEditar={setGastoEditar}
+                categoriaFiltro={categoriaFiltro}
+                gastosFiltrados={gastosFiltrados}
+              />
+
+            </>
             :
             <NuevoPresupuesto
               presupuesto={presupuesto}
@@ -61,23 +80,6 @@ function App() {
           setGastoEditar={setGastoEditar}
         />
       </main>
-
-      <Select
-        gastos={gastos}
-        categoriaFiltro={categoriaFiltro}
-        setCategoriaFiltro={setCategoriaFiltro}
-        setGastosFiltrados={setGastosFiltrados}
-      />
-
-      <ListaGastos
-        gastos={gastos}
-        setGastos={setGastos}
-        setEsActivoModal={setEsActivoModal}
-        setGastoEditar={setGastoEditar}
-        categoriaFiltro={categoriaFiltro}
-        gastosFiltrados={gastosFiltrados}
-      />
-
 
     </div>
   )

@@ -20,6 +20,7 @@ const NuevoPresupuesto = ({ setPresupuesto }) => {
   return (
     <form
       onSubmit={handleAgregarPresupuesto}
+      className="w-11/12 max-w-lg mx-auto mb-10 px-5 py-10 rounded-md bg-white shadow-lg"
     >
 
 
