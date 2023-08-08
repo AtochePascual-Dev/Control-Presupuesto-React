@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
-import { CircularProgressbar } from "react-circular-progressbar"
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
 import 'react-circular-progressbar/dist/styles.css';
 import { formatearCantidad } from "../helpers"
 
 const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos, setPresupuesto, setGastos }) => {
   const [gastado, setGastado] = useState(0);
+  const [porcentaje, setPorcentaje] = useState(0)
 
   useEffect(() => {
     const totalGastado = gastos.reduce((total, gasto) => total + gasto.cantidad, 0);
+    const nuevoPorcentaje = (((presupuesto - (presupuesto - totalGastado)) / presupuesto) * 100).toFixed(2);
+
     setGastado(totalGastado);
+
+    setTimeout(() => {
+      setPorcentaje(nuevoPorcentaje)
+    }, 500);
+
   }, [gastos]);
 
   const handleResetApp = () => {
@@ -21,7 +29,16 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos, setPresupue
 
       <div className="">
         <div className="w-2/3 mx-auto">
-          <CircularProgressbar />
+          <CircularProgressbar
+            value={porcentaje}
+            text={`${porcentaje}% Gastado`}
+            styles={buildStyles({
+              pathColor: '#4f46e5',
+              trailColor: '#f5f5f5',
+              textColor: '#4f46e5',
+              textSize: '10px',
+            })}
+          />
         </div>
         <button
           onClick={handleResetApp}
@@ -38,12 +55,12 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos, setPresupue
             {formatearCantidad(presupuesto)}
           </p>
 
-          <p className="font-semibold text-indigo-600">
+          <p className="font-semibold  text-indigo-600">
             <span className="text-xl font-bold text-gray-500">Gastado: </span>
             {formatearCantidad(gastado)}
           </p>
 
-          <p className="font-semibold text-indigo-600">
+          <p className={`font-semibold ${(presupuesto - gastado) < 0 ? "text-rose-600" : "text-indigo-600"} `}>
             <span className="text-xl font-bold text-gray-500">Disponible: </span>
             {formatearCantidad(presupuesto - gastado)}
           </p>
