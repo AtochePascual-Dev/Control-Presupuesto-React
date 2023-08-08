@@ -35,6 +35,7 @@ function App() {
             <ControlPresupuesto
               presupuesto={presupuesto}
               setEsActivoModal={setEsActivoModal}
+              gastos={gastos}
             />
             :
             <NuevoPresupuesto

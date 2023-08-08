@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar"
 import 'react-circular-progressbar/dist/styles.css';
 import { formatearCantidad } from "../helpers"
 
-const ControlPresupuesto = ({ presupuesto, setEsActivoModal }) => {
+const ControlPresupuesto = ({ presupuesto, setEsActivoModal, gastos }) => {
+  const [gastado, setGastado] = useState(0);
+
+  useEffect(() => {
+    if (gastos.length > 0) {
+      const totalGastado = gastos.reduce((total, gasto) => total + gasto.cantidad, 0);
+      setGastado(totalGastado);
+    };
+  }, [gastos]);
+
   return (
     <div className="grid gap-5 justify-center md:grid-cols-2"    >
 
@@ -24,12 +34,12 @@ const ControlPresupuesto = ({ presupuesto, setEsActivoModal }) => {
 
           <p className="font-semibold text-indigo-600">
             <span className="text-xl font-bold text-gray-500">Gastado: </span>
-            {formatearCantidad(presupuesto)}
+            {formatearCantidad(gastado)}
           </p>
 
           <p className="font-semibold text-indigo-600">
             <span className="text-xl font-bold text-gray-500">Disponible: </span>
-            {formatearCantidad(presupuesto)}
+            {formatearCantidad(presupuesto - gastado)}
           </p>
         </div>
 
